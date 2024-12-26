@@ -21,6 +21,8 @@ void main(void)
     } else {
         BGP_REG = DMG_PALETTE(DMG_BLACK, DMG_BLACK, DMG_BLACK, DMG_BLACK);
     }
+    // We assume that 2 images fit into one bank (starting at 1)
+    SWITCH_ROM(current_image / 2 + 1);
     draw_image(images[current_image]);
     SHOW_BKG;
 
@@ -34,6 +36,7 @@ void main(void)
         UPDATE_BUTTONS();
         if (BUTTON_TOGGLED(J_A | J_B)){
             current_image = (current_image + 1) % NUM_IMAGES;
+            SWITCH_ROM(current_image / 2 + 1);
             draw_image(images[current_image]);
             if (_cpu == CGB_TYPE) {
                 set_bkg_palette(BKGF_CGB_PAL0, CGB_ONE_PAL, palettes[current_image]);

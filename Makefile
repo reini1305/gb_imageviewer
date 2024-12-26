@@ -14,15 +14,9 @@ ifdef GBDK_DEBUG
 	LCCFLAGS += -debug -v
 endif
 
+# Enable autobanking, GBC support, MBC5
+LCCFLAGS += -I$(OBJDIR) -Wl-yt0x1B -Wm-yc -Wl-j -Wm-ya4 -autobank -Wb-ext=.rel -Wb-v
 
-# Add directory where image gets converted into (obj/)
-# So they can be included with "#include <res/somefile.h>"
-LCCFLAGS += -I$(OBJDIR)
-
-# Make the ROM CGB compatible (but not exclusive)
-LCCFLAGS += -Wm-yc
-
-# You can set the name of the .gb ROM file here
 PROJECTNAME = gb_imageviewer
 
 SRCDIR      = src
@@ -56,7 +50,7 @@ compile.bat: Makefile
 # -c ...                  : Set C output file
 # Convert metasprite .pngs in res/ -> .c files in obj/<platform ext>/src/
 $(RESOBJSRC)/%.c:	$(RESDIR)/%.png
-	$(PNG2ASSET) $< -keep_duplicate_tiles -map -bpp2 -tiles_only -c $@
+	$(PNG2ASSET) $< -keep_duplicate_tiles -map -bpp2 -b 255 -tiles_only -c $@
 
 # Compile the pngs that were converted to .c files
 # .c files in obj/res/ -> .o files in obj/
