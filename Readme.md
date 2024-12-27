@@ -5,6 +5,8 @@ This program is built on a GBDK example that allows to show a single fullscreen 
 
 Images placed in the res/folder will be automatically converted into C code and compiled into the viewer.
 
+![viewer in action](viewer.gif)
+
 Pressing the A or B button displays the next image.
 
 Pixel art originally by RodrixAP under Creative Commons Attribution 2.0 Generic (CC BY 2.0)
